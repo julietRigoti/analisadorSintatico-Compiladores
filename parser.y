@@ -6,6 +6,8 @@
 %}
 
 %token SUB SUM MULT DIV POW MOD INCR DECR ASG COMP
+%token AND OR NOT 
+%token TYPE ID
 
 %start program 
 %%
