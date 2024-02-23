@@ -45,7 +45,6 @@ void inserts(HashEntry *H[], char *name, int len, int type, int line){
 
     if(SearchToken(H, name) >= 0){
         printf("Este token já está na tabela\n\n");
-        return;
     }
     else if (H[index] == NULL){
         // A lista encadeada está vazia, então crie uma nova entrada

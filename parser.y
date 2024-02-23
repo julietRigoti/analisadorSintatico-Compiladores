@@ -1,19 +1,23 @@
 %{
-    #include "hashTable.c"
+    //#include "hashTable.c"
     #include <stdio.h>
+	int yylex(void);
+	void yyerror(char *);
     extern FILE *yyin;
-    int flag = 1;
 %}
 
-%token SUB SUM MULT DIV POW MOD INCR DECR ASG COMP
+%token SUB SUM MULT DIV POW MOD ASG COMP
 %token AND OR NOT 
-%token TYPE ID
-
-%start program 
+%token CHAR INT VOID FLOAT DOUBLE NUMBER STR
+%token O_KEY O_BRAC O_PAR C_PAR C_BRAC C_KEY SEMICOLON COMMA TWO_POINT POINT
+%token WHILE FOR IF ELSE 
+%token ID 
 %%
 
-%% 
 
+void yyerror(char *s){
+	fprintf(stderr, "%s\n", s);
+}
 /*int main(){
 
 	int i;
@@ -38,3 +42,8 @@
 	}
     return 0;
 }*/
+
+int main(){
+	yyparse();
+	return 0;
+}

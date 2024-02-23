@@ -1,55 +1,60 @@
 %{
 	/*1°)Definições */
 #include "hashTable.c"
+#include "y.tab.h"
+
+int flag = 1;
 HashEntry *H[TAM];
 %}
 
 /*Operadores aritmeticos*/
-sub "-" 
-sum "+"	
-mult "*" 
-div "/"	 
-pow "**"
-mod "%" 
+SUB "-" 
+SUM "+"	
+MULT "*" 
+DIV "/"	 
+POW "**"
+MOD "%" 
 
-/*Incremento e decremento/*
-incr "++" 
-decr "--" 
+/*Incremento e decremento*/
+/*incrm "++" */
+/*decrm "--" */
 
 /*Atribuição*/      
-assignment "=" 
+ASSIGMENT "=" 
 
 /*Operadores de comparação*/
-comparator  ("<"|">"|"<="|">="|"!="|"==") 
+COMPARATOR  ("<"|">"|"<="|">="|"!="|"==") 
 
 /*Operadores Logicos*/
-and "&&" 
-or "||" 
-not  ("~"|"!") 
-type ("char"|"int"|"void"|"float"|"double")
+AND "&&" 
+OR "||" 
+NOT  ("~"|"!") 
 
-o_key "{" 
-c_key "}" 
-o_brac "/[" 
-c_brac "/]" 
-o_par "(" 
-c_par ")" 
-two_point ":"
-semicolon ";" 
-comma ","
-point "." 
+CHAR "char"
+INT "int"
+VOID "void"
+FLOAT "float"
+DOUBLE "double"
+
+O_KEY "{" 
+C_KEY "}" 
+O_BRAC "/[" 
+C_BRAC "/]" 
+O_PAR "(" 
+C_PAR ")" 
+TWO_POINT ":"
+SEMICOLON ";" 
+COMMA ","
+POINT "." 
 EOF '\0' 
 
-letter [a-zA-Z] 
-string (\".*\") 
-number [0-9] 
-id {letter}({letter}|{number})* 
+LETTER [a-zA-Z] 
+STR (\".*\") 
+NUMBER [0-9]+
+ID {LETTER}({LETTER}|{NUMBER})* 
 
-{string} {
-    printf("Token: String -> %s\n", yytext);
-    inserts(H, yytext, strlen(yytext), 0, flag);
-    return STRING;
-}
+%%
+
 (while) {
     printf("Token: Palavra reservada -> %s\n", yytext);
     inserts(H, yytext, strlen(yytext), 0, flag);
@@ -65,12 +70,42 @@ id {letter}({letter}|{number})*
     inserts(H, yytext, strlen(yytext), 0, flag);
     return IF;
 }
-(type) {
+(else) {
     printf("Token: Palavra reservada -> %s\n", yytext);
     inserts(H, yytext, strlen(yytext), 0, flag);
-    return TYPE;
+    return ELSE;
 }
-{id} {
+(char) {
+    printf("Token: Palavra reservada -> %s\n", yytext);
+    inserts(H, yytext, strlen(yytext), 0, flag);
+    return CHAR;
+}
+(void) {
+    printf("Token: Palavra reservada -> %s\n", yytext);
+    inserts(H, yytext, strlen(yytext), 0, flag);
+    return VOID;
+}
+(int) {
+    printf("Token: Palavra reservada -> %s\n", yytext);
+    inserts(H, yytext, strlen(yytext), 0, flag);
+    return INT;
+}
+(float) {
+    printf("Token: Palavra reservada -> %s\n", yytext);
+    inserts(H, yytext, strlen(yytext), 0, flag);
+    return FLOAT;
+}
+(double) {
+    printf("Token: Palavra reservada -> %s\n", yytext);
+    inserts(H, yytext, strlen(yytext), 0, flag);
+    return DOUBLE;
+}
+{STR} {
+    inserts(H, yytext, strlen(yytext), 0, flag);
+    return STR;
+}
+
+{ID} {
     if(strlen(yytext) < 10){
         printf("Token: Identificador \"%s\"\n", yytext);
         inserts(H, yytext, strlen(yytext), 0, flag);
@@ -80,100 +115,125 @@ id {letter}({letter}|{number})*
         printf("ERRO: Tamanho maximo de identificador (20) excedido!\n");
     }
 }
-{number} {
+{NUMBER} {
     printf("Token: Digito\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
     return NUMBER;
 }
-{sum} {
+{SUM} {
     printf("Token: Operador de soma\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
     return SUM;
 }
-{sub} {
+{SUB} {
     printf("Token: Operador de subtracao\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
     return SUB;
 }
-{mult} {
+{MULT} {
     printf("Token: Operador de multiplicacao\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
     return MULT;
-} return ERROR;
-{div} {
+} 
+{DIV} {
     printf("Token: Operador de divisao\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
     return DIV;
 }
-{and} {
+{POW} {
+    printf("Token: Operador de pow\n");
+    inserts(H, yytext, strlen(yytext), 0, flag);
+    return POW;
+}
+{MOD} {
+    printf("Token: Operador de mod\n");
+    inserts(H, yytext, strlen(yytext), 0, flag);
+    return MOD;
+}
+{AND} {
     printf("Token: Operador Logico AND\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
     return AND;
 }
-{or} {
+{OR} {
 	printf("Token: Operador Logico OR\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
     return OR;
 }
-{not} {
+{NOT} {
     printf("Token: Operador Logico NOT\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
     return NOT;
 }
-{o_key} {
+{O_KEY} {
     printf("Token: Abre Chaves\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
     return O_KEY;
 }
-{o_brac} {
+{O_BRAC} {
     printf("Token: Abre Colchetes\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
     return O_BRAC;
 }
-{o_par} {
+{O_PAR} {
     printf("Token: Abre Parenteses\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
     return O_PAR;
 }
-{c_par} {
+{C_PAR} {
     printf("Token: Fecha Parenteses\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
     return C_PAR;
 }
-{c_brac} {
+{C_BRAC} {
     printf("Token: Fecha Colchetes\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
-    return C_BRAC;        return ERROR;
+    return C_BRAC;       
 }
-{c_key} {
+{C_KEY} {
     printf("Token: Fecha Chaves\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
     return C_KEY;
 }
-{comparator} {
+{COMPARATOR} {
     printf("Token: Comparacao\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
     return COMP;
 }
-{assignment} {
+{ASSIGMENT} {
     printf("Token: Atribuicao\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
     return ASG;
 }
-{semicolon} {
+{SEMICOLON} {
     printf("Token: Ponto-Virgula\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
     return SEMICOLON;
 }
-{comma} {
+{TWO_POINT} {
+    printf("Token:  dois pontos\n");
+    inserts(H, yytext, strlen(yytext), 0, flag);
+    return TWO_POINT;
+}
+{COMMA} {
     printf("Token: Virgula\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
     return COMMA;
 }
-{number}("$"|"@"|{letter}|{number})+  {
+{POINT} {
+    printf("Token: Ponto\n");
+    inserts(H, yytext, strlen(yytext), 0, flag);
+    return POINT;
+}
+{EOF} {
+    printf("Token: EOF\n");
+    inserts(H, yytext, strlen(yytext), 0, flag);
+    return EOF;
+}
+{NUMBER}("$"|"@"|{LETTER}|{NUMBER})+  {
 		printf("ERRO ID: Token [%s] nao identificado na linha: %d\n\n", yytext, flag);
 }
-{letter}("$"|"@"|{letter}|{number})+  {
+{LETTER}("$"|"@"|{LETTER}|{NUMBER})+  {
 		printf("ERRO ID: Token [%s] nao identificado na linha: %d\n\n", yytext, flag);
 }
 
@@ -185,4 +245,4 @@ id {letter}({letter}|{number})*
 
 %%
 
-int yywrap(){ return 1;}
+int yywrap(void){ return 1;}
