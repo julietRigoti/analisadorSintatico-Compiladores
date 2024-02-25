@@ -1,4 +1,5 @@
-#pragma once
+#ifndef HASHTABLE_H
+#define HASHTABLE_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,3 +29,5 @@ void initialization(HashEntry *H[]);
 //pos-condicao: elemento é inserido na tabela hash
 void inserts(HashEntry *H[], char *name, int len, int type, int line);
 
+
+#endif

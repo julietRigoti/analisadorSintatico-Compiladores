@@ -60,36 +60,36 @@ extern int yydebug;
     DIV = 261,                     /* DIV  */
     POW = 262,                     /* POW  */
     MOD = 263,                     /* MOD  */
-    INCRM = 264,                   /* INCRM  */
-    DECRM = 265,                   /* DECRM  */
-    ASG = 266,                     /* ASG  */
-    COMP = 267,                    /* COMP  */
-    AND = 268,                     /* AND  */
-    OR = 269,                      /* OR  */
-    NOT = 270,                     /* NOT  */
-    CHAR = 271,                    /* CHAR  */
-    INT = 272,                     /* INT  */
-    VOID = 273,                    /* VOID  */
-    FLOAT = 274,                   /* FLOAT  */
-    DOUBLE = 275,                  /* DOUBLE  */
-    NUMBER = 276,                  /* NUMBER  */
-    STRING = 277,                  /* STRING  */
-    STR = 278,                     /* STR  */
-    O_KEY = 279,                   /* O_KEY  */
-    O_BRAC = 280,                  /* O_BRAC  */
-    O_PAR = 281,                   /* O_PAR  */
-    C_PAR = 282,                   /* C_PAR  */
-    C_BRAC = 283,                  /* C_BRAC  */
-    C_KEY = 284,                   /* C_KEY  */
-    SEMICOLON = 285,               /* SEMICOLON  */
-    COMMA = 286,                   /* COMMA  */
-    TWO_POINT = 287,               /* TWO_POINT  */
-    POINT = 288,                   /* POINT  */
-    WHILE = 289,                   /* WHILE  */
-    FOR = 290,                     /* FOR  */
-    IF = 291,                      /* IF  */
-    ELSE = 292,                    /* ELSE  */
-    ID = 293                       /* ID  */
+    ASG = 264,                     /* ASG  */
+    COMP = 265,                    /* COMP  */
+    AND = 266,                     /* AND  */
+    OR = 267,                      /* OR  */
+    NOT = 268,                     /* NOT  */
+    CHAR = 269,                    /* CHAR  */
+    INT = 270,                     /* INT  */
+    VOID = 271,                    /* VOID  */
+    FLOAT = 272,                   /* FLOAT  */
+    DOUBLE = 273,                  /* DOUBLE  */
+    NUMBER = 274,                  /* NUMBER  */
+    STR = 275,                     /* STR  */
+    O_KEY = 276,                   /* O_KEY  */
+    O_BRAC = 277,                  /* O_BRAC  */
+    O_PAR = 278,                   /* O_PAR  */
+    C_PAR = 279,                   /* C_PAR  */
+    C_BRAC = 280,                  /* C_BRAC  */
+    C_KEY = 281,                   /* C_KEY  */
+    SEMICOLON = 282,               /* SEMICOLON  */
+    COMMA = 283,                   /* COMMA  */
+    TWO_POINT = 284,               /* TWO_POINT  */
+    POINT = 285,                   /* POINT  */
+    INCLUDE = 286,                 /* INCLUDE  */
+    WHILE = 287,                   /* WHILE  */
+    FOR = 288,                     /* FOR  */
+    IF = 289,                      /* IF  */
+    ELSE = 290,                    /* ELSE  */
+    ID = 291,                      /* ID  */
+    MAIN = 292,                    /* MAIN  */
+    RETURN = 293                   /* RETURN  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -104,36 +104,36 @@ extern int yydebug;
 #define DIV 261
 #define POW 262
 #define MOD 263
-#define INCRM 264
-#define DECRM 265
-#define ASG 266
-#define COMP 267
-#define AND 268
-#define OR 269
-#define NOT 270
-#define CHAR 271
-#define INT 272
-#define VOID 273
-#define FLOAT 274
-#define DOUBLE 275
-#define NUMBER 276
-#define STRING 277
-#define STR 278
-#define O_KEY 279
-#define O_BRAC 280
-#define O_PAR 281
-#define C_PAR 282
-#define C_BRAC 283
-#define C_KEY 284
-#define SEMICOLON 285
-#define COMMA 286
-#define TWO_POINT 287
-#define POINT 288
-#define WHILE 289
-#define FOR 290
-#define IF 291
-#define ELSE 292
-#define ID 293
+#define ASG 264
+#define COMP 265
+#define AND 266
+#define OR 267
+#define NOT 268
+#define CHAR 269
+#define INT 270
+#define VOID 271
+#define FLOAT 272
+#define DOUBLE 273
+#define NUMBER 274
+#define STR 275
+#define O_KEY 276
+#define O_BRAC 277
+#define O_PAR 278
+#define C_PAR 279
+#define C_BRAC 280
+#define C_KEY 281
+#define SEMICOLON 282
+#define COMMA 283
+#define TWO_POINT 284
+#define POINT 285
+#define INCLUDE 286
+#define WHILE 287
+#define FOR 288
+#define IF 289
+#define ELSE 290
+#define ID 291
+#define MAIN 292
+#define RETURN 293
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

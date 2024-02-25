@@ -1,10 +1,9 @@
 %{
 	/*1°)Definições */
-#include "hashTable.c"
-#include "y.tab.h"
-
-int flag = 1;
-HashEntry *H[TAM];
+    #include "hashTable.c"
+    #include "y.tab.h"
+    int flag = 1;
+    HashEntry *H[TAM], *HT[TAM];
 %}
 
 /*Operadores aritmeticos*/
@@ -47,6 +46,7 @@ SEMICOLON ";"
 COMMA ","
 POINT "." 
 EOF '\0' 
+INCLUDE ("#include"[ ]*<.+\.h>)
 
 LETTER [a-zA-Z] 
 STR (\".*\") 
@@ -57,48 +57,58 @@ ID {LETTER}({LETTER}|{NUMBER})*
 
 (while) {
     printf("Token: Palavra reservada -> %s\n", yytext);
-    inserts(H, yytext, strlen(yytext), 0, flag);
+    inserts(HT, yytext, strlen(yytext), 0, flag);
     return WHILE;
 }
 (for) {
     printf("Token: Palavra reservada -> %s\n", yytext);
-    inserts(H, yytext, strlen(yytext), 0, flag);
+    inserts(HT, yytext, strlen(yytext), 0, flag);
     return FOR;
 }
 (if) {
     printf("Token: Palavra reservada -> %s\n", yytext);
-    inserts(H, yytext, strlen(yytext), 0, flag);
+    inserts(HT, yytext, strlen(yytext), 0, flag);
     return IF;
 }
 (else) {
     printf("Token: Palavra reservada -> %s\n", yytext);
-    inserts(H, yytext, strlen(yytext), 0, flag);
+    inserts(HT, yytext, strlen(yytext), 0, flag);
     return ELSE;
 }
 (char) {
     printf("Token: Palavra reservada -> %s\n", yytext);
-    inserts(H, yytext, strlen(yytext), 0, flag);
+    inserts(HT, yytext, strlen(yytext), 0, flag);
     return CHAR;
 }
 (void) {
     printf("Token: Palavra reservada -> %s\n", yytext);
-    inserts(H, yytext, strlen(yytext), 0, flag);
+    inserts(HT, yytext, strlen(yytext), 0, flag);
     return VOID;
 }
 (int) {
     printf("Token: Palavra reservada -> %s\n", yytext);
-    inserts(H, yytext, strlen(yytext), 0, flag);
+    inserts(HT, yytext, strlen(yytext), 0, flag);
     return INT;
 }
 (float) {
     printf("Token: Palavra reservada -> %s\n", yytext);
-    inserts(H, yytext, strlen(yytext), 0, flag);
+    inserts(HT, yytext, strlen(yytext), 0, flag);
     return FLOAT;
 }
 (double) {
     printf("Token: Palavra reservada -> %s\n", yytext);
-    inserts(H, yytext, strlen(yytext), 0, flag);
+    inserts(HT, yytext, strlen(yytext), 0, flag);
     return DOUBLE;
+}
+(return) {
+    printf("Token: return\n");
+    inserts(H, yytext, strlen(yytext), 0, flag);
+    return RETURN;
+}
+(main) {
+    printf("Token: main\n");
+    inserts(H, yytext, strlen(yytext), 0, flag);
+    return MAIN;
 }
 {STR} {
     inserts(H, yytext, strlen(yytext), 0, flag);
@@ -164,6 +174,11 @@ ID {LETTER}({LETTER}|{NUMBER})*
     printf("Token: Operador Logico NOT\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
     return NOT;
+}
+{INCLUDE} {
+    printf("Token: Headers\n");
+    inserts(H, yytext, strlen(yytext), 0, flag);
+    return INCLUDE;
 }
 {O_KEY} {
     printf("Token: Abre Chaves\n");
@@ -231,16 +246,16 @@ ID {LETTER}({LETTER}|{NUMBER})*
     return EOF;
 }
 {NUMBER}("$"|"@"|{LETTER}|{NUMBER})+  {
-		printf("ERRO ID: Token [%s] nao identificado na linha: %d\n\n", yytext, flag);
+		printf("ERRO ID: Token nao identificado na linha\n\n");
 }
 {LETTER}("$"|"@"|{LETTER}|{NUMBER})+  {
-		printf("ERRO ID: Token [%s] nao identificado na linha: %d\n\n", yytext, flag);
+		printf("ERRO ID: Token nao identificado na linha\n\n");
 }
 
 "\n" {flag++;}
 [ \t\r\f]+
 . {
-	printf("Token [%s] nao identificado na linha: %d\n", yytext, flag);
+    printf("Token não identificado\n\n");
 }
 
 %%
