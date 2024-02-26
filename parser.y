@@ -8,41 +8,35 @@
     extern FILE *yyin;
 %}
 
-%token SUB SUM MULT DIV POW MOD ASG COMP
+%token SUB SUM MULT DIV POW MOD ASSIGMENT COMP
 %token AND OR NOT 
 %token CHAR INT VOID FLOAT DOUBLE NUMBER STR 
 %token O_KEY O_BRAC O_PAR C_PAR C_BRAC C_KEY SEMICOLON COMMA TWO_POINT POINT INCLUDE
 %token WHILE FOR IF ELSE 
-%token ID MAIN RETURN 
+%token ID RETURN 
 
-%start programa
+%start program
 %% 
 
-programa: headers principal;
+program: headers main;
 
-headers: INCLUDE |
-		 headers headers;
+headers: headers headers| INCLUDE | /*empty*/; 
 
-principal: type MAIN O_PAR args C_PAR O_KEY conteudo return C_KEY;
+type: INT | CHAR | DOUBLE | FLOAT | VOID; 
 
-type: INT | FLOAT | DOUBLE | CHAR | VOID ;
+main: type ID O_PAR args C_PAR O_KEY content C_KEY; 
 
-return: RETURN exp SEMICOLON | /* vazio */ ;
+args: type MULT ID |type ID O_BRAC C_BRAC| type ID | /*empty*/;
 
-args: type ID | type MULT ID | type ID O_BRAC C_BRAC;
+content: content content | attSTATE | /*empty*/;
 
-exp: exp_simples COMP exp_simples | exp_simples;
+attSTATE: bodyATT SEMICOLON;
 
-exp_simples: exp_simples op termo | termo; 
+bodyATT: type ID  |
+		 bodyATT COMMA ID  | 
+		 bodyATT ASSIGMENT NumORCh; 
 
-termo: termo op fator| fator ;
-
-op: SUM | SUB | MULT | DIV | POW | MOD ;
-
-fator: O_PAR exp C_PAR | NUMBER | ID;
-
-conteudo: args
-
+NumORCh: NUMBER | CHAR;	
 %%
 
 void yyerror (){

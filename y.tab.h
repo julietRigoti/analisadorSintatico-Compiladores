@@ -60,7 +60,7 @@ extern int yydebug;
     DIV = 261,                     /* DIV  */
     POW = 262,                     /* POW  */
     MOD = 263,                     /* MOD  */
-    ASG = 264,                     /* ASG  */
+    ASSIGMENT = 264,               /* ASSIGMENT  */
     COMP = 265,                    /* COMP  */
     AND = 266,                     /* AND  */
     OR = 267,                      /* OR  */
@@ -88,8 +88,7 @@ extern int yydebug;
     IF = 289,                      /* IF  */
     ELSE = 290,                    /* ELSE  */
     ID = 291,                      /* ID  */
-    MAIN = 292,                    /* MAIN  */
-    RETURN = 293                   /* RETURN  */
+    RETURN = 292                   /* RETURN  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -104,7 +103,7 @@ extern int yydebug;
 #define DIV 261
 #define POW 262
 #define MOD 263
-#define ASG 264
+#define ASSIGMENT 264
 #define COMP 265
 #define AND 266
 #define OR 267
@@ -132,8 +131,7 @@ extern int yydebug;
 #define IF 289
 #define ELSE 290
 #define ID 291
-#define MAIN 292
-#define RETURN 293
+#define RETURN 292
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

@@ -1,6 +1,6 @@
 %{
 	/*1°)Definições */
-    #include "hashTable.c"
+    #include "hashTable.h"
     #include "y.tab.h"
     int flag = 1;
     HashEntry *H[TAM], *HT[TAM];
@@ -37,15 +37,15 @@ DOUBLE "double"
 
 O_KEY "{" 
 C_KEY "}" 
-O_BRAC "/[" 
-C_BRAC "/]" 
+O_BRAC "[" 
+C_BRAC "]" 
 O_PAR "(" 
 C_PAR ")" 
 TWO_POINT ":"
 SEMICOLON ";" 
 COMMA ","
 POINT "." 
-EOF '\0' 
+EOF "\0"
 INCLUDE ("#include"[ ]*<.+\.h>)
 
 LETTER [a-zA-Z] 
@@ -105,16 +105,10 @@ ID {LETTER}({LETTER}|{NUMBER})*
     inserts(H, yytext, strlen(yytext), 0, flag);
     return RETURN;
 }
-(main) {
-    printf("Token: main\n");
-    inserts(H, yytext, strlen(yytext), 0, flag);
-    return MAIN;
-}
 {STR} {
     inserts(H, yytext, strlen(yytext), 0, flag);
     return STR;
 }
-
 {ID} {
     if(strlen(yytext) < 10){
         printf("Token: Identificador \"%s\"\n", yytext);
@@ -218,7 +212,7 @@ ID {LETTER}({LETTER}|{NUMBER})*
 {ASSIGMENT} {
     printf("Token: Atribuicao\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
-    return ASG;
+    return ASSIGMENT;
 }
 {SEMICOLON} {
     printf("Token: Ponto-Virgula\n");
