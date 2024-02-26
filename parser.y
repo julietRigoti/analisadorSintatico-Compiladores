@@ -28,15 +28,28 @@ main: type ID O_PAR args C_PAR O_KEY content C_KEY;
 
 args: type MULT ID |type ID O_BRAC C_BRAC| type ID | /*empty*/;
 
-content: content content | attSTATE | /*empty*/;
+content: content content | attSTATE | expSTATE | /*empty*/;
 
 attSTATE: bodyATT SEMICOLON;
 
 bodyATT: type ID  |
 		 bodyATT COMMA ID  | 
-		 bodyATT ASSIGMENT NumORCh; 
+		 bodyATT ASSIGMENT NumORCh| bodyATT ASSIGMENT expSTATE; 
 
 NumORCh: NUMBER | CHAR;	
+
+expSTATE: expSTATE SUM expSTATE | 
+		  expSTATE SUB expSTATE | 
+		  expSTATE MULT expSTATE | 
+		  expSTATE DIV expSTATE | 
+		  expSTATE POW expSTATE | 
+		  expSTATE MOD expSTATE |
+		  expSTATE AND expSTATE |
+		  expSTATE OR expSTATE |
+		  NOT expSTATE |
+		  expSTATE COMP expSTATE|
+		  O_PAR expSTATE C_PAR |
+		  NumORCh;
 %%
 
 void yyerror (){
