@@ -62,33 +62,35 @@ extern int yydebug;
     MOD = 263,                     /* MOD  */
     ASSIGMENT = 264,               /* ASSIGMENT  */
     COMP = 265,                    /* COMP  */
-    AND = 266,                     /* AND  */
-    OR = 267,                      /* OR  */
-    NOT = 268,                     /* NOT  */
-    CHAR = 269,                    /* CHAR  */
-    INT = 270,                     /* INT  */
-    VOID = 271,                    /* VOID  */
-    FLOAT = 272,                   /* FLOAT  */
-    DOUBLE = 273,                  /* DOUBLE  */
-    NUMBER = 274,                  /* NUMBER  */
-    STR = 275,                     /* STR  */
-    O_KEY = 276,                   /* O_KEY  */
-    O_BRAC = 277,                  /* O_BRAC  */
-    O_PAR = 278,                   /* O_PAR  */
-    C_PAR = 279,                   /* C_PAR  */
-    C_BRAC = 280,                  /* C_BRAC  */
-    C_KEY = 281,                   /* C_KEY  */
-    SEMICOLON = 282,               /* SEMICOLON  */
-    COMMA = 283,                   /* COMMA  */
-    TWO_POINT = 284,               /* TWO_POINT  */
-    POINT = 285,                   /* POINT  */
-    INCLUDE = 286,                 /* INCLUDE  */
-    WHILE = 287,                   /* WHILE  */
-    FOR = 288,                     /* FOR  */
-    IF = 289,                      /* IF  */
-    ELSE = 290,                    /* ELSE  */
-    ID = 291,                      /* ID  */
-    RETURN = 292                   /* RETURN  */
+    INCR = 266,                    /* INCR  */
+    DECR = 267,                    /* DECR  */
+    AND = 268,                     /* AND  */
+    OR = 269,                      /* OR  */
+    NOT = 270,                     /* NOT  */
+    CHAR = 271,                    /* CHAR  */
+    INT = 272,                     /* INT  */
+    VOID = 273,                    /* VOID  */
+    FLOAT = 274,                   /* FLOAT  */
+    DOUBLE = 275,                  /* DOUBLE  */
+    NUMBER = 276,                  /* NUMBER  */
+    STR = 277,                     /* STR  */
+    O_KEY = 278,                   /* O_KEY  */
+    O_BRAC = 279,                  /* O_BRAC  */
+    O_PAR = 280,                   /* O_PAR  */
+    C_PAR = 281,                   /* C_PAR  */
+    C_BRAC = 282,                  /* C_BRAC  */
+    C_KEY = 283,                   /* C_KEY  */
+    O_COMENT = 284,                /* O_COMENT  */
+    C_COMENT = 285,                /* C_COMENT  */
+    SEMICOLON = 286,               /* SEMICOLON  */
+    COMMA = 287,                   /* COMMA  */
+    INCLUDE = 288,                 /* INCLUDE  */
+    WHILE = 289,                   /* WHILE  */
+    FOR = 290,                     /* FOR  */
+    IF = 291,                      /* IF  */
+    ELSE = 292,                    /* ELSE  */
+    ID = 293,                      /* ID  */
+    RETURN = 294                   /* RETURN  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -105,33 +107,35 @@ extern int yydebug;
 #define MOD 263
 #define ASSIGMENT 264
 #define COMP 265
-#define AND 266
-#define OR 267
-#define NOT 268
-#define CHAR 269
-#define INT 270
-#define VOID 271
-#define FLOAT 272
-#define DOUBLE 273
-#define NUMBER 274
-#define STR 275
-#define O_KEY 276
-#define O_BRAC 277
-#define O_PAR 278
-#define C_PAR 279
-#define C_BRAC 280
-#define C_KEY 281
-#define SEMICOLON 282
-#define COMMA 283
-#define TWO_POINT 284
-#define POINT 285
-#define INCLUDE 286
-#define WHILE 287
-#define FOR 288
-#define IF 289
-#define ELSE 290
-#define ID 291
-#define RETURN 292
+#define INCR 266
+#define DECR 267
+#define AND 268
+#define OR 269
+#define NOT 270
+#define CHAR 271
+#define INT 272
+#define VOID 273
+#define FLOAT 274
+#define DOUBLE 275
+#define NUMBER 276
+#define STR 277
+#define O_KEY 278
+#define O_BRAC 279
+#define O_PAR 280
+#define C_PAR 281
+#define C_BRAC 282
+#define C_KEY 283
+#define O_COMENT 284
+#define C_COMENT 285
+#define SEMICOLON 286
+#define COMMA 287
+#define INCLUDE 288
+#define WHILE 289
+#define FOR 290
+#define IF 291
+#define ELSE 292
+#define ID 293
+#define RETURN 294
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

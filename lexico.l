@@ -1,5 +1,5 @@
 %{
-	/*1°)Definições */
+	/*1°Definições */
     #include "hashTable.h"
     #include "y.tab.h"
     int flag = 1;
@@ -15,8 +15,8 @@ POW "**"
 MOD "%" 
 
 /*Incremento e decremento*/
-/*incrm "++" */
-/*decrm "--" */
+INCR "++" 
+DECR "--" 
 
 /*Atribuição*/      
 ASSIGMENT "=" 
@@ -34,6 +34,7 @@ INT "int"
 VOID "void"
 FLOAT "float"
 DOUBLE "double"
+RETURN "return"
 
 O_KEY "{" 
 C_KEY "}" 
@@ -41,10 +42,10 @@ O_BRAC "["
 C_BRAC "]" 
 O_PAR "(" 
 C_PAR ")" 
-TWO_POINT ":"
+O_COMENT ("/*")
+C_COMENT ("*/")
 SEMICOLON ";" 
 COMMA ","
-POINT "." 
 EOF "\0"
 INCLUDE ("#include"[ ]*<.+\.h>)
 
@@ -154,6 +155,16 @@ ID {LETTER}({LETTER}|{NUMBER})*
     inserts(H, yytext, strlen(yytext), 0, flag);
     return MOD;
 }
+{INCR} {
+    printf("Token: Incremento\n");
+    inserts(H, yytext, strlen(yytext), 0, flag);
+    return INCR;
+}
+{DECR} {
+    printf("Token: Decremento\n");
+    inserts(H, yytext, strlen(yytext), 0, flag);
+    return DECR;
+}
 {AND} {
     printf("Token: Operador Logico AND\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
@@ -204,6 +215,16 @@ ID {LETTER}({LETTER}|{NUMBER})*
     inserts(H, yytext, strlen(yytext), 0, flag);
     return C_KEY;
 }
+{O_COMENT} {
+    printf("Token: Abre comentario\n");
+    inserts(H, yytext, strlen(yytext), 0, flag);
+    return O_COMENT;
+}
+{C_COMENT} {
+    printf("Token: Fecha comentario\n");
+    inserts(H, yytext, strlen(yytext), 0, flag);
+    return C_COMENT;
+}
 {COMPARATOR} {
     printf("Token: Comparacao\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
@@ -219,20 +240,10 @@ ID {LETTER}({LETTER}|{NUMBER})*
     inserts(H, yytext, strlen(yytext), 0, flag);
     return SEMICOLON;
 }
-{TWO_POINT} {
-    printf("Token:  dois pontos\n");
-    inserts(H, yytext, strlen(yytext), 0, flag);
-    return TWO_POINT;
-}
 {COMMA} {
     printf("Token: Virgula\n");
     inserts(H, yytext, strlen(yytext), 0, flag);
     return COMMA;
-}
-{POINT} {
-    printf("Token: Ponto\n");
-    inserts(H, yytext, strlen(yytext), 0, flag);
-    return POINT;
 }
 {EOF} {
     printf("Token: EOF\n");

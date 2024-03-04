@@ -41,8 +41,7 @@ int SearchToken(HashEntry *H[], char *name){
 
 void inserts(HashEntry *H[], char *name, int len, int type, int line){
     int index = hash(name);
-    HashEntry *entry = H[index];
-
+    
     if(SearchToken(H, name) >= 0){
         printf("Este token já está na tabela\n\n");
     }

@@ -23,6 +23,12 @@ typedef struct HashEntry tab[MAX];
 //pos-condicao: nenhuma
 void initialization(HashEntry *H[]);
 
+int hash(char *name); 
+
+HashEntry *createSlot(char *name, int len, int type, int line); 
+
+int SearchToken(HashEntry *H[], char *name);
+
 //Inserir um elemento na tabela hash
 //Entrada: tabela hash, nome do token, len do tamanho da palavra, type que é o tipo do token, line é o numero da linha das fontes 
 //pre-condicao: nenhuma
