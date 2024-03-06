@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define TAM 53 // para tabela hash
-#define MAX 30 // para vetor de char
+#define TAM 127 // para tabela hash
+#define MAX 100 // para vetor de char
 
 typedef struct HashEntry{
     char name[MAX];

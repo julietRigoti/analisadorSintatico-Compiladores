@@ -106,6 +106,16 @@ ID {LETTER}({LETTER}|{NUMBER})*
     inserts(H, yytext, strlen(yytext), 0, flag);
     return RETURN;
 }
+(printf) {
+    printf("Token: printf\n");
+    inserts(H, yytext, strlen(yytext), 0, flag);
+    return PRINTF;
+}
+(scanf) {
+    printf("Token: scanf\n");
+    inserts(H, yytext, strlen(yytext), 0, flag);
+    return SCANF;
+}
 {STR} {
     inserts(H, yytext, strlen(yytext), 0, flag);
     return STR;

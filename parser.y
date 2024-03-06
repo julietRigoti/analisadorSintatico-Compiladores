@@ -11,57 +11,74 @@
 %token SUB SUM MULT DIV POW MOD ASSIGMENT COMP INCR DECR
 %token AND OR NOT 
 %token CHAR INT VOID FLOAT DOUBLE NUMBER STR 
-%token O_KEY O_BRAC O_PAR C_PAR C_BRAC C_KEY O_COMENT C_COMENT SEMICOLON COMMA INCLUDE
+%token O_KEY O_BRAC O_PAR C_PAR C_BRAC C_KEY O_COMENT C_COMENT SEMICOLON COMMA INCLUDE PRINTF SCANF 
 %token WHILE FOR IF ELSE 
 %token ID RETURN 
+
+%left MULT DIV MOD 
+%left SUB SUM 
+%left COMP 
+%right ASSIGMENT 
 
 %start program
 %% 
 
-program: headers main { printf("\t1.COMECOU O PROGRAMA\n\n");};
+program: headers main;
 
 headers: headers headers | INCLUDE | /*empty*/; 
 
-type: INT | CHAR | DOUBLE | FLOAT | VOID; 
+dataType: INT | CHAR | DOUBLE | FLOAT | VOID; 
 
-op: SUM | SUB | MULT | DIV | POW | MOD | ASSIGMENT;
+operator: SUM | SUB | MULT | DIV | POW | MOD | ASSIGMENT;
 
-opL: AND | OR;
+opLogical: AND | OR;
 
-opIorD: INCR | DECR;
+opINCorDEC: INCR | DECR;
 
-main: type ID O_PAR args C_PAR O_KEY content return C_KEY; 
+main: dataType ID O_PAR args C_PAR O_KEY content return C_KEY; 
 
-args: type MULT ID |type ID O_BRAC C_BRAC| type ID | /*empty*/;
+args: dataType MULT ID | dataType ID O_BRAC C_BRAC| dataType ID | /*empty*/;
 
 return: RETURN NUMorID SEMICOLON; 
 
 content: content cont | cont;
 
-cont:  attSTATE | ifSTATE | forSTATE | whileSTATE | comentSTATE  | /*empty*/;
+cont:  attSTATE | ifSTATE | forSTATE | whileSTATE | comentSTATE  | PRorSC_STATE | /*empty*/;
+
+PRorSC_STATE: PRorSC O_PAR STR bodyPRorSC C_PAR SEMICOLON;
+
+PRorSC: PRINTF | SCANF;
+
+bodyPRorSC: COMMA ID bodyPRorSC | COMMA expCOND bodyPRorSC| /*empty*/; 
 
 attSTATE: bodyATT SEMICOLON;
 
-bodyATT: type ID  | bodyATT COMMA ID  | bodyATT ASSIGMENT NUMorID; 
+bodyATT: dataType ID  | bodyATT COMMA ID  | bodyATT ASSIGMENT NUMorID | attSTR; 
 
-NUMorID: NUMBER | ID ;	
+attSTR: CHAR ID O_BRAC NUMorEMP C_BRAC bodySTR;
+
+bodySTR: ASSIGMENT STR | /*empty*/ ;
+
+NUMorID: NUMBER | ID ;
+
+NUMorEMP: NUMBER | /*empty*/  ;
 
 ifSTATE: IF O_PAR expCOND C_PAR bodyLOOP elseSTATE;
 
 expCOND: expCOND COMP expCOND | O_PAR expCOND C_PAR |
-		 expCOND op expCOND | expCOND opL expCOND | NUMorID; 
+		 expCOND operator expCOND | expCOND opLogical expCOND | NUMorID; 
 
 elseSTATE : ELSE O_KEY content C_KEY| ELSE ifSTATE| /*empty*/  ;
 
 forSTATE: FOR O_PAR forINIT SEMICOLON expCOND SEMICOLON forUPD C_PAR bodyLOOP; 
 
-forINIT: type INITF | INITF | /*empty*/;
+forINIT: dataType INITF | INITF | /*empty*/;
 		 
 INITF: ID ASSIGMENT NUMorID | INITF COMMA INITF;
 
 forUPD: UPDF | /*empty*/; 
 
-UPDF: ID opIorD | UPDF COMMA UPDF; 
+UPDF: ID opINCorDEC | UPDF COMMA UPDF; 
 
 whileSTATE: WHILE O_PAR expCOND C_PAR bodyLOOP;
 
@@ -72,7 +89,7 @@ comentSTATE: O_COMENT content C_COMENT;
 %%
 
 void yyerror (){
-  fprintf(stderr, "Erro de sintaxe na linha %d\n", flag);
+  fprintf(stderr, "\nErro de sintaxe na linha %d\n", flag);
 }
 
 int main(){

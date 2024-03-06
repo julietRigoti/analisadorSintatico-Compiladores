@@ -85,12 +85,14 @@ extern int yydebug;
     SEMICOLON = 286,               /* SEMICOLON  */
     COMMA = 287,                   /* COMMA  */
     INCLUDE = 288,                 /* INCLUDE  */
-    WHILE = 289,                   /* WHILE  */
-    FOR = 290,                     /* FOR  */
-    IF = 291,                      /* IF  */
-    ELSE = 292,                    /* ELSE  */
-    ID = 293,                      /* ID  */
-    RETURN = 294                   /* RETURN  */
+    PRINTF = 289,                  /* PRINTF  */
+    SCANF = 290,                   /* SCANF  */
+    WHILE = 291,                   /* WHILE  */
+    FOR = 292,                     /* FOR  */
+    IF = 293,                      /* IF  */
+    ELSE = 294,                    /* ELSE  */
+    ID = 295,                      /* ID  */
+    RETURN = 296                   /* RETURN  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -130,12 +132,14 @@ extern int yydebug;
 #define SEMICOLON 286
 #define COMMA 287
 #define INCLUDE 288
-#define WHILE 289
-#define FOR 290
-#define IF 291
-#define ELSE 292
-#define ID 293
-#define RETURN 294
+#define PRINTF 289
+#define SCANF 290
+#define WHILE 291
+#define FOR 292
+#define IF 293
+#define ELSE 294
+#define ID 295
+#define RETURN 296
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
