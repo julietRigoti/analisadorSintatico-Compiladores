@@ -92,7 +92,8 @@ extern int yydebug;
     IF = 293,                      /* IF  */
     ELSE = 294,                    /* ELSE  */
     ID = 295,                      /* ID  */
-    RETURN = 296                   /* RETURN  */
+    RETURN = 296,                  /* RETURN  */
+    ERROID = 297                   /* ERROID  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -140,10 +141,23 @@ extern int yydebug;
 #define ELSE 294
 #define ID 295
 #define RETURN 296
+#define ERROID 297
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+union YYSTYPE
+{
+#line 16 "parser.y"
+
+		struct teste{
+			char name[MAX*2];
+			struct node* tr; 
+		} obj;
+
+#line 158 "y.tab.h"
+
+};
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif

@@ -1,6 +1,16 @@
 #include <stdio.h>
-int main (){
-    int x = 1, y = 1, sum;
-    sum = x + y;
-    return sum;
+#include <stdlib.h>
+
+int main(char argv[]){
+    int i = 0, j, aux; 
+    char aux[] = "Compiladores";
+    
+    if(i == 0){
+        scanf("%d", aux); 
+
+        for( ;aux < 10; aux++){
+            printf("aux = %d\n", aux);
+        }
+    }
+    return 0;
 }
