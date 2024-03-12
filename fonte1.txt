@@ -1,6 +1,6 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
-
 int main(char argv[]){
     int i = 0, j, aux; 
     char aux[] = "Compiladores";
@@ -8,8 +8,11 @@ int main(char argv[]){
     if(i == 0){
         scanf("%d", aux); 
 
-        for( ;aux < 10; aux++){
+        for(int a = 0, b = 1;aux < 10; aux++, a--, b++){
             printf("aux = %d\n", aux);
+            if(b == 0){
+                b = 1;
+            }
         }
     }
     return 0;

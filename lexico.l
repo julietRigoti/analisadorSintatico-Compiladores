@@ -118,6 +118,8 @@ ERROID ({LETTER}|{NUMBER})("$"|"@"|{LETTER}|{NUMBER})+
     return SCANF;
 }
 {STR} {
+    inserts(H, yytext, strlen(yytext), flag);
+    strcpy(yylval.obj.name, (yytext));
     return STR;
 }
 {ID} {
@@ -138,50 +140,61 @@ ERROID ({LETTER}|{NUMBER})("$"|"@"|{LETTER}|{NUMBER})+
 }
 {SUM} {
     inserts(H, yytext, strlen(yytext), flag);
+    strcpy(yylval.obj.name, (yytext));
     return SUM;
 }
 {SUB} {
     inserts(H, yytext, strlen(yytext), flag);
+    strcpy(yylval.obj.name, (yytext));
     return SUB;
 }
 {MULT} {
     inserts(H, yytext, strlen(yytext), flag);
+    strcpy(yylval.obj.name, (yytext));
     return MULT;
 } 
 {DIV} {
     inserts(H, yytext, strlen(yytext), flag);
+    strcpy(yylval.obj.name, (yytext));
     return DIV;
 }
 {POW} {
     inserts(H, yytext, strlen(yytext), flag);
+    strcpy(yylval.obj.name, (yytext));
     return POW;
 }
 {MOD} {
     inserts(H, yytext, strlen(yytext), flag);
+    strcpy(yylval.obj.name, (yytext));
     return MOD;
 }
 {INCR} {
     inserts(H, yytext, strlen(yytext), flag);
+    strcpy(yylval.obj.name, (yytext));
     return INCR;
 }
 {DECR} {
     inserts(H, yytext, strlen(yytext), flag);
+    strcpy(yylval.obj.name, (yytext));
     return DECR;
 }
 {AND} {
     inserts(H, yytext, strlen(yytext), flag);
+    strcpy(yylval.obj.name, (yytext));
     return AND;
 }
 {OR} {
     inserts(H, yytext, strlen(yytext), flag);
+    strcpy(yylval.obj.name, (yytext));
     return OR;
 }
 {NOT} {
     inserts(H, yytext, strlen(yytext), flag);
+    strcpy(yylval.obj.name, (yytext));
     return NOT;
 }
 {INCLUDE} {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(HT, yytext, strlen(yytext), flag);
     strcpy(yylval.obj.name, (yytext));
     return INCLUDE;
 }
@@ -219,10 +232,12 @@ ERROID ({LETTER}|{NUMBER})("$"|"@"|{LETTER}|{NUMBER})+
 }
 {COMPARATOR} {
     inserts(H, yytext, strlen(yytext), flag);
+    strcpy(yylval.obj.name, (yytext));
     return COMP;
 }
 {ASSIGMENT} {
     inserts(H, yytext, strlen(yytext), flag);
+    strcpy(yylval.obj.name, (yytext));
     return ASSIGMENT;
 }
 {SEMICOLON} {
