@@ -22,19 +22,12 @@ DECR "--"
 ASSIGMENT "=" 
 
 /*Operadores de comparação*/
-COMPARATOR  ("<"|">"|"<="|">="|"!="|"==") 
+COMPARATOR  ("<"|">"|"<="|">="|"!="|"==")
 
 /*Operadores Logicos*/
 AND "&&" 
 OR "||" 
 NOT  ("~"|"!") 
-
-CHAR "char"
-INT "int"
-VOID "void"
-FLOAT "float"
-DOUBLE "double"
-RETURN "return"
 
 O_KEY "{" 
 C_KEY "}" 
@@ -48,7 +41,6 @@ SEMICOLON ";"
 COMMA ","
 
 INCLUDE ("#include"[ ]*<.+\.h>)
-
 LETTER [a-zA-Z] 
 STR (\".*\") 
 NUMBER [0-9]+
@@ -233,7 +225,7 @@ ERROID ({LETTER}|{NUMBER})("$"|"@"|{LETTER}|{NUMBER})+
 {COMPARATOR} {
     inserts(H, yytext, strlen(yytext), flag);
     strcpy(yylval.obj.name, (yytext));
-    return COMP;
+    return COMPARATOR;
 }
 {ASSIGMENT} {
     inserts(H, yytext, strlen(yytext), flag);

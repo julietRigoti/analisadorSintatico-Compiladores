@@ -20,7 +20,7 @@
 		} obj;
 }
 
-%token <obj> SUB SUM MULT DIV POW MOD ASSIGMENT COMP INCR DECR
+%token <obj> SUB SUM MULT DIV POW MOD ASSIGMENT COMPARATOR INCR DECR
 %token <obj> AND OR NOT 
 %token <obj> CHAR INT VOID FLOAT DOUBLE NUMBER STR 
 %token <obj> O_KEY O_BRAC O_PAR C_PAR C_BRAC C_KEY O_COMENT C_COMENT SEMICOLON COMMA INCLUDE PRINTF SCANF 
@@ -71,7 +71,9 @@ operator: SUM {
 		  POW {
 			$$.tr = insertNode(NULL, NULL, "**");} | 
 		  MOD {
-			$$.tr = insertNode(NULL, NULL, "%");} | 
+			$$.tr = insertNode(NULL, NULL, "%");} |
+		 COMPARATOR {
+			$$.tr = insertNode(NULL, NULL, $1.name);} |
 		  ASSIGMENT {
 			$$.tr = insertNode(NULL, NULL, "=");}; 
 
@@ -183,7 +185,7 @@ ifSTATE: IF O_PAR expCOND C_PAR bodyLOOP elseSTATE {
 			$$.tr = insertNode(init, $6.tr, "bodyIF");
 };
 
-expCOND: expCOND COMP expCOND { 
+expCOND: expCOND COMPARATOR expCOND { 
 		$$.tr = insertNode($1.tr, $3.tr, "expCOND COMP expCOND");} |
 		 O_PAR expCOND C_PAR { 
 		$$.tr = insertNode($2.tr, NULL, "O_PAR expCOND C_PAR");} |
